@@ -62,7 +62,7 @@ export default function Frameworks() {
                     transition={{ delay: 0.6, duration: 0.6 }}
                 >
                     <p className="text-gray-400">
-                        + More frameworks coming soon (Go, Rust, .NET, Java/Spring Boot)
+                        + More frameworks coming soon (Go, Rust, .NET)
                     </p>
                 </motion.div>
             </div>

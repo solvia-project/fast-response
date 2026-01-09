@@ -13,13 +13,13 @@ const features = [
     {
         icon: Globe,
         title: 'Universal Compatibility',
-        description: 'Works seamlessly with Express, Fastify, NestJS, Laravel, Spring Boot, and more.',
+        description: 'Works seamlessly with Express, Fastify, NestJS, Laravel, FastAPI, and more.',
         color: 'from-blue-500 to-cyan-500',
     },
     {
         icon: Shield,
         title: 'Type Safety',
-        description: 'Full TypeScript, PHP, and Java type support with IDE auto-completion.',
+        description: 'Full TypeScript, PHP, and Python type support with IDE auto-completion.',
         color: 'from-purple-500 to-pink-500',
     },
     {
