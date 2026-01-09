@@ -60,39 +60,41 @@ Route::post('/users', function (Request $request) {
     return Response::solvia()->created($user);
 });`,
     },
-    java: {
-        title: 'Java / Spring Boot',
-        code: `import com.solvia.response.Response;
-import com.solvia.response.SolviaResponse;
+    python: {
+        title: 'Python / FastAPI',
+        code: `from solvia_response import Response
+from fastapi import FastAPI
+from fastapi.responses import JSONResponse
 
-@RestController
-@RequestMapping("/api/users")
-public class UserController {
+app = FastAPI()
 
-    @GetMapping
-    public SolviaResponse<List<User>> getUsers(
-        HttpServletRequest request
-    ) {
-        List<User> users = userService.findAll();
-        return Response.success(users, request.getRequestURI());
-    }
+@app.get("/users")
+async def get_users():
+    users = await db.users.find_many()
+    response = Response.success(users, "/api/users")
+    return JSONResponse(
+        content=response.to_dict(),
+        status_code=response.code
+    )
 
-    @PostMapping
-    public SolviaResponse<User> createUser(
-        @RequestBody User user,
-        HttpServletRequest request
-    ) {
-        if (!isValid(user)) {
-            return Response.validationError(
-                errors, 
-                request.getRequestURI()
-            );
-        }
-        
-        User created = userService.create(user);
-        return Response.created(created, request.getRequestURI());
-    }
-}`,
+@app.post("/users")
+async def create_user(user: UserCreate):
+    if not validation.is_valid(user):
+        response = Response.validation_error(
+            errors,
+            "/api/users"
+        )
+        return JSONResponse(
+            content=response.to_dict(),
+            status_code=response.code
+        )
+    
+    created = await db.users.create(user)
+    response = Response.created(created, "/api/users")
+    return JSONResponse(
+        content=response.to_dict(),
+        status_code=response.code
+    )`,
     },
 }
 
@@ -111,7 +113,7 @@ const responseExample = `{
 }`
 
 export default function CodeShowcase() {
-    const [activeTab, setActiveTab] = useState<'typescript' | 'php' | 'java'>('typescript')
+    const [activeTab, setActiveTab] = useState<'typescript' | 'php' | 'python'>('typescript')
 
     return (
         <section className="py-24 px-4 relative">
@@ -146,7 +148,7 @@ export default function CodeShowcase() {
                                 {Object.entries(codeExamples).map(([key, { title }]) => (
                                     <button
                                         key={key}
-                                        onClick={() => setActiveTab(key as 'typescript' | 'php' | 'java')}
+                                        onClick={() => setActiveTab(key as 'typescript' | 'php' | 'python')}
                                         className={`flex-1 px-6 py-4 font-semibold transition-all ${activeTab === key
                                             ? 'bg-white/10 text-white border-b-2 border-primary-500'
                                             : 'text-gray-400 hover:text-white hover:bg-white/5'
@@ -160,7 +162,7 @@ export default function CodeShowcase() {
                             {/* Code */}
                             <div className="p-4">
                                 <SyntaxHighlighter
-                                    language={activeTab === 'typescript' ? 'typescript' : activeTab === 'php' ? 'php' : 'java'}
+                                    language={activeTab === 'typescript' ? 'typescript' : activeTab === 'php' ? 'php' : 'python'}
                                     style={vscDarkPlus}
                                     customStyle={{
                                         margin: 0,

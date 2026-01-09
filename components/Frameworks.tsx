@@ -6,10 +6,10 @@ const frameworks = [
     { name: 'Express.js', logo: '⚡', color: 'from-gray-600 to-gray-800' },
     { name: 'Fastify', logo: '⚙️', color: 'from-black to-gray-900' },
     { name: 'NestJS', logo: '🦅', color: 'from-red-600 to-pink-600' },
-    { name: 'Spring Boot', logo: '🍃', color: 'from-green-600 to-emerald-600' },
     { name: 'Laravel', logo: '🔺', color: 'from-red-500 to-orange-500' },
     { name: 'FastAPI', logo: '🚀', color: 'from-teal-500 to-green-500' },
     { name: 'Django', logo: '🎸', color: 'from-green-700 to-emerald-700' },
+    { name: 'Flask', logo: '⚗️', color: 'from-gray-600 to-gray-800' },
     { name: 'Koa.js', logo: '🌿', color: 'from-gray-700 to-gray-900' },
 ]
 
@@ -62,7 +62,7 @@ export default function Frameworks() {
                     transition={{ delay: 0.6, duration: 0.6 }}
                 >
                     <p className="text-gray-400">
-                        + More frameworks coming soon (Go, Rust, .NET, Spring Boot)
+                        + More frameworks coming soon (Go, Rust, .NET, Java/Spring Boot)
                     </p>
                 </motion.div>
             </div>
